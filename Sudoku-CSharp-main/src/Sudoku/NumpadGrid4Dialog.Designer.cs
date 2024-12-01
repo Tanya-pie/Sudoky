@@ -1,16 +1,16 @@
-﻿
+
 namespace Sudoku
 {
     partial class NumpadGrid4Dialog
     {
-        /// <summary>
+        
         /// Required designer variable.
-        /// </summary>
+        
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        
         /// Clean up any resources being used.
-        /// </summary>
+        
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
@@ -23,10 +23,10 @@ namespace Sudoku
 
         #region Windows Form Designer generated code
 
-        /// <summary>
+        
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
-        /// </summary>
+        
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NumpadGrid4Dialog));
@@ -109,7 +109,7 @@ namespace Sudoku
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(69, 29);
             this.btnClear.TabIndex = 9;
-            this.btnClear.Text = "Clear";
+            this.btnClear.Text = "Очистить";
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
@@ -124,7 +124,7 @@ namespace Sudoku
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(69, 29);
             this.btnCancel.TabIndex = 10;
-            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Text = "Отменить";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
@@ -147,7 +147,7 @@ namespace Sudoku
             this.MinimizeBox = false;
             this.Name = "NumpadGrid4Dialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Select Number";
+            this.Text = "Выберете значение";
             this.ResumeLayout(false);
 
         }
