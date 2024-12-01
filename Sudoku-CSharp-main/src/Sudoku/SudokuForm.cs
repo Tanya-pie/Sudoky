@@ -1,4 +1,4 @@
-﻿using Sudoku.Constants;
+using Sudoku.Constants;
 using Sudoku.Helpers;
 using Sudoku.Models;
 using System;
@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Sudoku
 {
-    /// <summary>
-    /// Sudoku Form Events Implementation Class.
-    /// </summary>
+
+    /// Класс реализации событий формы Судоку
+
     public partial class SudokuForm : Form
     {
         int ticks = 0;
@@ -22,33 +22,31 @@ namespace Sudoku
         Grid grid;
         readonly List<Label> cellControls = new List<Label>();
 
-        /// <summary>
-        /// SudokuForm Constructor
-        /// </summary>
+
+        /// Конструктор форм судоку
+
         public SudokuForm() => InitializeComponent();
 
         #region Form Loading Event
 
-        /// <summary>
-        /// Sudoku Form Load Event
-        /// </summary>
-        /// <param name="sender">The Sender</param>
-        /// <param name="e">The Event Args</param>
+
+        /// Событие загрузки формы судоку
+
         private void SudokuForm_Load(object sender, EventArgs e)
         {
             cmbBoxMode.SelectedIndex = 0;
             cmbBoxGrid.SelectedIndex = 0;
         }
+        
+        /// обновление интерфейса
 
         #endregion
 
         #region Timer tick Event
 
-        /// <summary>
-        /// Timer Tick Event
-        /// </summary>
-        /// <param name="sender">The Sender</param>
-        /// <param name="e">The Event Args</param>
+
+        /// Timer Tick (таймер) 
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             ticks = timerStarted ? ticks + 1 : 0;
@@ -61,26 +59,22 @@ namespace Sudoku
             }
         }
 
-        /// <summary>
-        /// Message Timer Tick Event
-        /// </summary>
-        /// <param name="sender">The Sender</param>
-        /// <param name="e">The Event Args</param>
+
+        /// сообщение Timer Tick 
+
         private void MessageTimer_Tick(object sender, EventArgs e)
         {
             ResetStatus();
             messageTimer.Stop();
         }
-
+        /// обновление
         #endregion
 
         #region Click Events
 
-        /// <summary>
-        /// Generate Button Click Event
-        /// </summary>
-        /// <param name="sender">The Sender</param>
-        /// <param name="e">The Event Args</param>
+
+        /// Сгенерировать событие нажатия кнопки
+
         private void BtnGenerate_Click(object sender, EventArgs e)
         {
             timerStarted = false;
@@ -101,16 +95,14 @@ namespace Sudoku
             messageTimer.Start();
         }
 
-        /// <summary>
-        /// Validate Button Click Event
-        /// </summary>
-        /// <param name="sender">The Sender</param>
-        /// <param name="e">The Event Args</param>
+
+        /// Событие подтверждения нажатия кнопки
+
         private void BtnValidate_Click(object sender, EventArgs e)
         {
             string message;
             var messageColor = Color.DodgerBlue;
-            
+
             if (grid.IsGridEmpty())
             {
                 messageColor = Color.Orange;
@@ -142,11 +134,9 @@ namespace Sudoku
             messageTimer.Start();
         }
 
-        /// <summary>
-        /// Solve Button Click Event
-        /// </summary>
-        /// <param name="sender">The Sender</param>
-        /// <param name="e">The Event Args</param>
+
+        /// нажатие кнопки "Решить"
+
         private void BtnSolve_Click(object sender, EventArgs e)
         {
             var solver = new Solver(grid);
@@ -171,11 +161,9 @@ namespace Sudoku
             messageTimer.Start();
         }
 
-        /// <summary>
-        /// Reset Button Click Event
-        /// </summary>
-        /// <param name="sender">The Sender</param>
-        /// <param name="e">The Event Args</param>
+
+        /// Событие нажатия кнопки сброса
+
         private void BtnReset_Click(object sender, EventArgs e)
         {
             timer.Start();
@@ -194,14 +182,13 @@ namespace Sudoku
 
         #region Options Selection Events
 
-        /// <summary>
-        /// Mode ComboBox Selection Index Change Event
-        /// </summary>
-        /// <param name="sender">The Sender</param>
-        /// <param name="e">The Event Args</param>
+
+        /// Событие изменения индекса выбора выпадающего списка режима
+
         private void CmbBoxMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            gridMode = cmbBoxMode.SelectedIndex switch {
+            gridMode = cmbBoxMode.SelectedIndex switch
+            {
                 2 => FormConstants.Hard,
                 1 => FormConstants.Medium,
                 _ => FormConstants.Easy
@@ -209,11 +196,9 @@ namespace Sudoku
 
         }
 
-        /// <summary>
-        /// Grid ComboBox Selection Index Change Event
-        /// </summary>
-        /// <param name="sender">The Sender</param>
-        /// <param name="e">The Event Args</param>
+
+        /// Событие изменения индекса выбора выпадающего списка сетки
+
         private void CmbBoxGrid_SelectedIndexChanged(object sender, EventArgs e)
         {
             int columns;
@@ -223,14 +208,14 @@ namespace Sudoku
             ResetStatus();
             CreateTheGrid();
         }
-
+        /// обновление
         #endregion
 
         #region Grid Events
 
-        /// <summary>
-        /// Creates the Sudoku Grid in Window Form UI
-        /// </summary>
+
+        /// Создание сетки судоку в пользовательском интерфейсе оконной формы
+
         private void CreateTheGrid()
         {
             ClearTheGrid();
@@ -242,21 +227,21 @@ namespace Sudoku
             var cellFontFamily = FormConstants.FontFamily;
             var cellFontSize = grid.GridSize == 9 ? 16 : 22;
 
-            // Iterates through Rows
+            // Выполняет итерацию по строкам
             for (var x = 0; x < grid.TotalRows; x++)
             {
                 var cellLeftLocation = 5;
 
-                // Iterates through Columns and Place each cell side by side for the current row.
+                // Выполняет итерацию по столбцам и помещает каждую ячейку рядом с текущей строкой
                 for (var y = 0; y < grid.TotalColumns; y++)
                 {
-                    // Control Label within cell
+                    // Контрольная метка внутри ячейки
                     var cell = new Label
                     {
-                        // Index of the cell
+                        // индекс ячейки
                         Tag = x * grid.TotalRows + y,
 
-                        // UI Properties
+                        // Свойства пользовательского интерфейса
                         Width = cellWidth,
                         Height = cellHeight,
                         Left = cellLeftLocation,
@@ -268,31 +253,29 @@ namespace Sudoku
                         BackColor = Color.GhostWhite,
                     };
 
-                    // Click Event for the cell.
+                    // Щелкните Событие для ячейки
                     cell.MouseClick += Cell_Click;
-                    // Mouse Hover Event for the cell
+                    // Событие наведения курсора мыши на ячейку
                     cell.MouseHover += Cell_Hover;
-                    // Mouse Leave Event for the cell
+                    // Событие выхода мыши из ячейки
                     cell.MouseLeave += Cell_Leave;
 
-                    // Modify 'cellLeftLocation' with left padding for other cells w.r.t current column.
+                    // Измените "расположение слева от ячейки", добавив левое заполнение для других ячеек в текущем столбце
                     cellLeftLocation += cellWidth + ((y + 1) % grid.SubGridSize == 0 ? 5 : 1);
 
-                    // Add the cell to the 'CellControls' list and to the Grid View.
+                    // Добавьте ячейку в список "Элементы управления ячейками" и в таблицу
                     cellControls.Add(cell);
                     gridView.Controls.Add(cell);
                 }
 
-                // Modify 'cellTopLocation' with top padding for other cells w.r.t current row.
+                // Измените "расположение ячейки в верхней части" с помощью верхнего отступа для других ячеек в текущей строке
                 cellTopLocation += cellHeight + ((x + 1) % grid.SubGridSize == 0 ? 5 : 2);
             }
         }
 
-        /// <summary>
-        /// Hover Event for the cell.
-        /// </summary>
-        /// <param name="sender">The Sender</param>
-        /// <param name="e">The Mouse Event Args</param>
+
+        /// Событие наведения курсора мыши на ячейку
+
         private void Cell_Hover(object sender, EventArgs e)
         {
             Label cellControl = (sender as Label);
@@ -300,11 +283,9 @@ namespace Sudoku
             cellControl.ForeColor = Color.GhostWhite;
         }
 
-        /// <summary>
-        /// Leave Event for the cell.
-        /// </summary>
-        /// <param name="sender">The Sender</param>
-        /// <param name="e">The Mouse Event Args</param>
+
+        /// Оставьте событие для ячейки
+
         private void Cell_Leave(object sender, EventArgs e)
         {
             Label cellControl = (sender as Label);
@@ -312,11 +293,10 @@ namespace Sudoku
             cellControl.ForeColor = Color.Black;
         }
 
-        /// <summary>
-        /// Click Event for the cell.
-        /// </summary>
-        /// <param name="sender">The Sender</param>
-        /// <param name="e">The Mouse Event Args</param>
+
+        /// Щелкните Событие для ячейки
+
+
         private void Cell_Click(object sender, MouseEventArgs e)
         {
             Label clickedCellControl = (sender as Label);
@@ -345,10 +325,10 @@ namespace Sudoku
 
                 #endregion
 
-                // Show the numpad dialog.
+                // Откройтие диалогового окна с цифровой клавиатурой
                 numpadGrid9Dialog.Show();
 
-                // Handle the closed event of the numpad dialog to get the result.
+                // Обработайтка события закрытия диалогового окна с цифровой клавиатурой, чтобы получить результат
                 numpadGrid9Dialog.FormClosed += (object s, FormClosedEventArgs ea) =>
                 {
                     if (numpadGrid9Dialog.Value != -1 && numpadGrid9Dialog.Value != 0)
@@ -362,7 +342,7 @@ namespace Sudoku
                         RefreshTheGrid();
                     }
 
-                    // Dispose the numpad dialog.
+                    // Закройте диалоговое окно цифровой клавиатуры
                     numpadGrid9Dialog.Dispose();
                 };
             }
@@ -389,10 +369,10 @@ namespace Sudoku
 
                 #endregion
 
-                // Show the numpad dialog.
+                // Откройте диалоговое окно с цифровой клавиатурой
                 numpadGrid4Dialog.Show();
 
-                // Handle the closed event of the numpad dialog to get the result.
+                // Обработайте событие закрытия диалогового окна с цифровой клавиатурой, чтобы получить результат
                 numpadGrid4Dialog.FormClosed += (object s, FormClosedEventArgs ea) =>
                 {
                     if (numpadGrid4Dialog.Value != -1 && numpadGrid4Dialog.Value != 0)
@@ -406,22 +386,21 @@ namespace Sudoku
                         RefreshTheGrid();
                     }
 
-                    // Dispose the numpad dialog.
+                    // Закройте диалоговое окно цифровой клавиатуры
                     numpadGrid4Dialog.Dispose();
                 };
 
             }
         }
 
-        /// <summary>
-        /// Reset the Status Label
-        /// </summary>
+
+        /// Сбросьте метку состояния
         private void ResetStatus() => lblStatus.Text = string.Empty;
 
-        /// <summary>
-        /// Refresh the Sudoku Grid in Window Form UI
-        /// </summary>
-        private void RefreshTheGrid() 
+
+        /// Обновление сетки судоку в пользовательском интерфейсе оконной формы
+
+        private void RefreshTheGrid()
             => cellControls.ForEach(cell =>
                 {
                     var cellIndex = (int)cell.Tag;
@@ -429,17 +408,17 @@ namespace Sudoku
                     cell.Text = cellValue != -1 ? cellValue.ToString() : string.Empty;
                 });
 
-        /// <summary>
-        /// Reset the Sudoku Grid in Window Form UI
-        /// </summary>
+
+        /// Сброс сетки судоку в пользовательском интерфейсе оконной формы
+
         private void ResetTheGrid()
             => Parallel.Invoke(
                 () => cellControls.ForEach(cell => cell.Text = string.Empty),
                 () => grid.Cells.ForEach(prop => prop.Value = -1));
 
-        /// <summary>
-        /// Clear the Sudoku Grid
-        /// </summary>
+
+        /// Очистите сетку судоку
+
         private void ClearTheGrid()
         {
             cellControls.Clear();
@@ -449,5 +428,10 @@ namespace Sudoku
         }
 
         #endregion
+
+        private void lblStatus_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
