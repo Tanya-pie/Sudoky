@@ -1,5 +1,5 @@
-# Sudoky## Sudoku Game
-Sudoku Game Generator, Validator, and Solver with Easy, Medium and Hard Modes. Also, with 4x4 and 9x9 Grid.
+# Генератор судоку
+Генератор игр судоку, валидатор и Серебро с легким, средним и сложным режимами. Также с сеткой 4х4 и 9х9.
 
 <br />
 
@@ -8,9 +8,3 @@ Sudoku Game Generator, Validator, and Solver with Easy, Medium and Hard Modes. A
 ![Sudoku Game 9x9](https://raw.githubusercontent.com/nayanbunny/Sudoku-CSharp/main/src/images/sudoku-9x9.png)
 ![Sudoku Game 9x9 Numpad](https://raw.githubusercontent.com/nayanbunny/Sudoku-CSharp/main/src/images/sudoku-9x9-numpad.png)
 <br />
-
-## License
-[MIT](https://github.com/nayanbunny/Sudoku-CSharp/blob/main/LICENSE)
-
-## Support
-(Like the Game) => :star: [The Sudoku-CSharp Repository](https://github.com/nayanbunny/Sudoku-CSharp)
