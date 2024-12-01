@@ -3,14 +3,14 @@ using System.Windows.Forms;
 
 namespace Sudoku
 {
-    /// <summary>
-    /// Program Initiation of the Sudoku application.
-    /// </summary>
+
+    /// Программный запуск приложения Sudoku
+
     static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
+
+        ///  Основная точка входа в приложение
+
         [STAThread]
         static void Main()
         {
