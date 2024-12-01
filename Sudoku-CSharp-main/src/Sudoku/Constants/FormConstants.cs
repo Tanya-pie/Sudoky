@@ -1,27 +1,27 @@
-﻿namespace Sudoku.Constants
+namespace Sudoku.Constants
 {
-    /// <summary>
-    /// Constants used across the application files.
-    /// </summary>
+
+    /// Константы, используемые во всех файлах приложения
+
     public class FormConstants
     {
-        // Grid Modes
+        // режимы сетки
         public const string Easy = "Easy";
-        public const string Medium = "Medium";
+        public const string Medium = "Medium";  
         public const string Hard = "Hard";
 
-        // Messages
-        public const string PuzzleGenerated = "Sudoku puzzle generated!";
-        public const string PuzzleSolved = "Sudoku puzzle solved!";
-        public const string PuzzleCleared = "Sudoku puzzle grid cleared.";
-        public const string CongratulationsMessage = "Congratulations!, the sudoku puzzle is solved.";
-        public const string PuzzleGridEmpty = "The Sudoku puzzle grid is empty.";
-        public const string PuzzleInvalidSolve = "Sorry, the sudoku puzzle is not solved correctly.";
-        public const string PuzzleValidButNotCompleted = "The current state of the sudoku puzzle is correct, but not completed yet.";
-        public const string PuzzleInvalidSolveState = "Sorry, the current state of the sudoku puzzle is incorrect.";
-        public const string PuzzleNoSolution = "No solution for this sudoku puzzle.";
+        // сообщения
+        public const string PuzzleGenerated = "Сгенерированная головоломка судоку!";
+        public const string PuzzleSolved = "Головоломка судоку решена!";
+        public const string PuzzleCleared = "Сетка головоломок судоку очищена";
+        public const string CongratulationsMessage = "Поздравляем, головоломка судоку решена!";
+        public const string PuzzleGridEmpty = "Сетка для головоломки судоку пуста";
+        public const string PuzzleInvalidSolve = "К сожалению, головоломка судоку решена неправильно";
+        public const string PuzzleValidButNotCompleted = "Текущее состояние головоломки судоку правильное, но она еще не завершена";
+        public const string PuzzleInvalidSolveState = "Извините, текущее состояние головоломки судоку неверно";
+        public const string PuzzleNoSolution = "У этой головоломки судоку нет решения";
 
-        //Fonts
+        // фон
         public const string FontFamily = "Maiandra GD";
     }
 }
