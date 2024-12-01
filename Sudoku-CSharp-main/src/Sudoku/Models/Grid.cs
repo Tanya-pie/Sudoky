@@ -1,56 +1,47 @@
-﻿using Sudoku.Helpers;
+using Sudoku.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Sudoku.Models
 {
-    /// <summary>
-    /// Grid of the Sudoku
-    /// </summary>
+
+    /// Сетка для игры в судоку
+
     public class Grid
     {
-        /// <summary>
-        /// The Total Rows Property
-        /// </summary>
-        /// <returns>Total Rows Number</returns>
+
+        /// Свойство Total Rows (Общее количество строк)
+
         public int TotalRows { get; private set; }
-        /// <summary>
-        /// The Total Columns Property
-        /// </summary>
-        /// <returns>Total Columns Number</returns>
+
+        /// Свойство Итоговых столбцов
+
         public int TotalColumns { get; private set; }
-        /// <summary>
-        /// The Grid Size Property
-        /// </summary>
-        /// <returns>Grid Size Number</returns>
+
+        /// Свойство Размера сетки
+
         public int GridSize { get; private set; }
-        /// <summary>
-        /// The Sub Grid Size Property
-        /// </summary>
-        /// <returns>Sub Grid Size Number</returns>
+
+        /// Свойство размера подсети
+
         public int SubGridSize { get; private set; }
-        /// <summary>
-        /// The Total Cells Property
-        /// </summary>
-        /// <returns>Total Cells Number</returns>
+
+        /// Свойство Total Cells (Общие ячейки)
+
         public int TotalCells { get => TotalRows * TotalColumns; }
-        /// <summary>
-        /// The Cells Property
-        /// </summary>
-        /// <returns>List of Cells</returns>
+
+        /// Свойство Cells (Ячейки)
+
         public List<Cell> Cells { get; set; }
-        /// <summary>
-        /// The Solver
-        /// </summary>
-        /// <returns>The Solver Instance</returns>
+
+        /// Решатель
+
         public Solver Solver { get; }
 
-        /// <summary>
-        /// Grid Constructor
-        /// </summary>
-        /// <param name="totalRows">The Total Rows</param>
-        /// <param name="totalColumns">The Total Columns</param>
+
+        /// Конструктор сетки
+
         public Grid(int totalRows, int totalColumns)
         {
             TotalRows = totalRows;
@@ -62,40 +53,34 @@ namespace Sudoku.Models
             InitializeCells();
         }
 
-        /// <summary>
-        /// Checks whether the grid is fully filled or not.
-        /// </summary>
-        /// <returns><c>true</c> if the grid is fully filled otherwise, <c>false</c>.</returns>
+
+        ///Проверяет, полностью ли заполнена сетка или нет
+
         public bool IsGridFilled() => Cells.FirstOrDefault(cell => cell.Value == -1) == null;
 
-        /// <summary>
-        /// Check whether grid is empty or not.
-        /// </summary>
-        /// <returns><c>true</c> if the grid is empty; otherwise, <c>false</c>.</returns>
+
+        /// Проверяет, пуста ли сетка или нет
+
         public bool IsGridEmpty() => Cells.FirstOrDefault(cell => cell.Value != -1) == null;
 
-        /// <summary>
-        /// Reset Cell values to -1. 
-        /// </summary>
+
+        /// Сброс значения ячеек на -1
+
         public void Clear() => Cells.ForEach(cell => SetCellValue(-1, cell.Index));
 
-        /// <summary>
-        /// Get the Cell.
-        /// </summary>
-        /// <param name="cellIndex">The cell index.</param>
-        /// <returns>Cell</returns>
+        
+        /// Get the Cell
+        
         public Cell GetCell(int cellIndex) => Cells[cellIndex];
 
-        /// <summary>
-        /// Set the Cell Value.
-        /// </summary>
-        /// <param name="cellIndex">The cell index.</param>
-        /// <param name="value">The Value.</param>
+
+        /// Установление значения ячейки
+
         public void SetCellValue(int cellIndex, int value) => Cells[cellIndex].Value = value;
 
-        /// <summary>
-        /// Initailize the Cells.
-        /// </summary>
+
+        /// Инициализируйте ячейки
+
         private void InitializeCells()
         {
             for (var x = 0; x < TotalRows; x++)
