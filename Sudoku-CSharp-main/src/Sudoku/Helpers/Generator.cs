@@ -1,4 +1,4 @@
-﻿using Sudoku.Constants;
+using Sudoku.Constants;
 using Sudoku.Models;
 using System;
 using System.Collections.Generic;
@@ -6,32 +6,29 @@ using System.Linq;
 
 namespace Sudoku.Helpers
 {
-    /// <summary>
-    /// Generator Class will be used to generate Sudoku Grid.
-    /// </summary>
+    ///Generator Class для создания игральной сетки
     public class Generator
     {
-        /// <summary>
-        /// The Grid instance.
-        /// </summary>
+
+        /// Экземпляр сетки
+
         readonly Grid grid;
-        /// <summary>
-        /// The Mode.
-        /// </summary>
+        
+        /// Режим игры
+        
         private readonly string mode;
-        /// <summary>
-        /// The Solver instance.
-        /// </summary>
+
+        ///Экземпляр решателя
+
         private readonly Solver solver;
-        /// <summary>
-        /// Random object to use creating random numbers.
-        /// </summary>
+
+        ///Случайный объект для использования при создании случайных чисел 
+
         private readonly Random random = new Random();
 
-        /// <summary>
-        /// Generator Constructor
-        /// </summary>
-        /// <param name="gridInstance">The grid instance.</param>
+        /// Конструктор генератора
+
+        /// name="gridInstance">Экземпляр сетки
         public Generator(Grid gridInstance, string gridMode)
         {
             grid = gridInstance ?? new Grid(4, 4);
@@ -39,10 +36,9 @@ namespace Sudoku.Helpers
             solver = new Solver(grid);
         }
 
-        /// <summary>
-        /// Generates the Sudoku Grid.
-        /// </summary>
-        /// <returns><c>true</c> if the sudoku grid is generated; otherwise, <c>false</c>.</returns>
+
+        /// Генерация сетки судоку
+
         public bool Generate()
         {
             solver.Solve();
@@ -51,9 +47,9 @@ namespace Sudoku.Helpers
             return true;
         }
 
-        /// <summary>
-        /// Generate Sudoku Grid with few empty cells.
-        /// </summary>
+
+        /// Создание сетки судоку с несколькими пустыми ячейками. И их определения, в зависимости от сложности (по общепринятым правилам)
+
         private void GenerateGrid()
         {
             var cellValueIndexes = (mode, grid.GridSize) switch
@@ -69,11 +65,9 @@ namespace Sudoku.Helpers
             grid.Cells.ForEach(cell => cell.Value = !cellValueIndexes.Contains(cell.Index) ? -1 : cell.Value);
         }
 
-        /// <summary>
-        /// Generate random indexes which will have cell values.
-        /// </summary>
-        /// <param name="requiredNumbers"></param>
-        /// <returns></returns>
+        /// Генерация случайных индексов, которые будут содержать значения ячеек
+
+        ///  name="requiredNumbers"
         private List<int> GenerateRandomIndexes(int requiredNumbers)
         {
             return Enumerable.Range(0, requiredNumbers).Select(x => random.Next(0, grid.TotalCells)).ToList();
