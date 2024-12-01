@@ -1,26 +1,23 @@
-﻿namespace Sudoku.Models
+namespace Sudoku.Models
 {
-    /// <summary>
-    /// Position class to hold Row and Column position of the grid cell.
-    /// </summary>
+
+    /// Класс Position для удержания положения строки и столбца в ячейке сетки
+
     public class Position
     {
-        /// <summary>
-        /// The Row Property
-        /// </summary>
-        /// <returns>Row Position Number</returns>
+
+        /// Свойство строки
+
         public int Row { get; private set; }
-        /// <summary>
-        /// The Column Property
-        /// </summary>
-        /// <returns>Column Position Number</returns>
+
+        /// Свойство столбца
+
         public int Column { get; private set; }
 
-        /// <summary>
-        /// Position Constructor
-        /// </summary>
-        /// <param name="row">The row.</param>
-        /// <param name="column">The column.</param>
+
+        /// Конструктор позиций
+
+
         public Position(int row, int column)
         {
             Row = row;
