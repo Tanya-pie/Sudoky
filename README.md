@@ -4,7 +4,7 @@
 <br />
 
 ![Sudoku Game 4x4](https://github.com/Tanya-pie/Sudoky/blob/main/Sudoku-CSharp-main/src/images/image.png)
-![Sudoku Game 4x4 Numpad](https://raw.githubusercontent.com/nayanbunny/Sudoku-CSharp/main/src/images/sudoku-4x4-numpad.png)
-![Sudoku Game 9x9](https://raw.githubusercontent.com/nayanbunny/Sudoku-CSharp/main/src/images/sudoku-9x9.png)
-![Sudoku Game 9x9 Numpad](https://raw.githubusercontent.com/nayanbunny/Sudoku-CSharp/main/src/images/sudoku-9x9-numpad.png)
+![Sudoku Game 4x4]()
+![Sudoku Game 9x9]()
+![Sudoku Game 9x9]()
 <br />
