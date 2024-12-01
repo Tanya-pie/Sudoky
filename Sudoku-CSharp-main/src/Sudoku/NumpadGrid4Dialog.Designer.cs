@@ -105,7 +105,7 @@ namespace Sudoku
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.ForeColor = System.Drawing.Color.GhostWhite;
-            this.btnClear.Location = new System.Drawing.Point(94, 107);
+            this.btnClear.Location = new System.Drawing.Point(105, 107);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(85, 29);
             this.btnClear.TabIndex = 9;
@@ -133,7 +133,7 @@ namespace Sudoku
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.ClientSize = new System.Drawing.Size(190, 149);
+            this.ClientSize = new System.Drawing.Size(200, 149);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnNumber4);
