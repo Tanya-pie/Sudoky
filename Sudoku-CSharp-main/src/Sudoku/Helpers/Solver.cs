@@ -1,82 +1,81 @@
-﻿using Sudoku.Models;
+using Sudoku.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Sudoku.Helpers
 {
-    /// <summary>
-    /// Solver Class will be used to solve Sudoku Grid using backtracking process.
-    /// </summary>
+
+    /// Класс Solver будет использоваться для решения сетки судоку с использованием процесса обратного отслеживания
+
     public class Solver
     {
-        /// <summary>
-        /// The Grid instance.
-        /// </summary>
+
+        /// Экземпляр сетки
+
         readonly Grid grid;
-        /// <summary>
-        /// Cell indexes that excludes from backtracking.
-        /// </summary>
+
+        /// Индексы ячеек, исключающие возможность обратного отслеживания
+
         private readonly List<int> filledCells = new List<int>();
-        /// <summary>
-        /// Cell Indexes of Invalid Values used while backtracking process.
-        /// </summary>
+
+        /// Индексы ячеек с недопустимыми значениями, используемыми в процессе обратного отслеживания
+
         private List<List<int>> blackListCells;
-        /// <summary>
-        /// Random object to use creating random numbers.
-        /// </summary>
+
+        /// Случайный объект для использования при создании случайных чисел
+
         private readonly Random random = new Random();
 
-        /// <summary>
-        /// Solver Constructor
-        /// </summary>
-        /// <param name="gridInstance">The grid instance.</param>
+
+        /// Конструктор решателя
+
         public Solver(Grid gridInstance)
         {
             grid = gridInstance ?? new Grid(4, 4);
             InitializeBlackList();
         }
 
-        /// <summary>
-        /// Solves the Sudoku Grid.
-        /// </summary>
-        /// <returns><c>true</c> if the sudoku gird is solved; otherwise, <c>false</c>.</returns>
+
+        /// Решает сетку судоку
+
+
         public bool Solve()
         {
-            // Return false if the current grid is not valid.
+            // Возвращает значение false, если текущая таблица недействительна
             if (!ValidateGrid()) return false;
 
-            // Initialize Filled Cells to preserve which will be used while backtracking.
+            // Инициализируйет заполненные ячейки, чтобы сохранить те, которые будут использоваться при обратном отслеживании
             IntializeFilledCells();
 
-            // Clear the blacklist
+            // Очистите черный список
             ClearBlackList();
 
             int currentCellIndex = 0;
 
-            // Iterate all the cells of the grid.
+            // Выполните итерацию по всем ячейкам сетки
             while (currentCellIndex < grid.TotalCells)
             {
-                // If current cell index already preserved in filled cells, pass it.
+                // Если текущий индекс ячейки уже сохранен в заполненных ячейках, передайте его
                 if (filledCells.Contains(currentCellIndex))
                 {
                     ++currentCellIndex;
                     continue;
                 }
 
-                // Clear blacklists of the indexes after the current index.
+                // Очистите черные списки индексов после текущего индекса
                 ClearBlackList(cleaningStartIndex: currentCellIndex + 1);
 
                 Cell currentCell = grid.GetCell(cellIndex: currentCellIndex);
 
                 int foundNumber = GetValidNumberForTheCell(currentCellIndex);
 
-                // No valid number found for the cell. Let's backtrack.
+                // Не найден действительный ячейки, вернемся назад
                 if (foundNumber == 0)
                     currentCellIndex = BackTrackTo(currentCellIndex);
                 else
                 {
-                    // Set found valid value to current cell.
+                    // Установите найденное допустимое значение в текущую ячейку
                     grid.SetCellValue(currentCell.Index, foundNumber);
                     ++currentCellIndex;
                 }
@@ -85,21 +84,16 @@ namespace Sudoku.Helpers
             return true;
         }
 
-        /// <summary>
-        /// Check whether grid is valid.
-        /// </summary>
-        /// <param name="ignoreEmptyCells">The Ignore Empty Cells.</param>
-        /// <returns><c>true</c> if the grid is valid; otherwise, <c>false</c>.</returns>
+
+        /// Проверьте, является ли сетка действительной
+
         public bool ValidateGrid(bool ignoreEmptyCells = false) =>
             grid.Cells.Where(cell => cell.Value != -1)
             .FirstOrDefault(cell => cell.Value != -1 && !IsValidValueForTheCell(cell.Value, cell)) == null;
 
-        /// <summary>
-        /// Checks the specified cell value is value for cell.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="cell">The cell.</param>
-        /// <returns><c>true</c> if the value is valid for the cell; otherwise, <c>false</c>.</returns>
+
+        /// Проверяет, является ли указанное значение ячейки значением для ячейки
+
         public bool IsValidValueForTheCell(int value, Cell cell)
         {
             var matchedCell = grid.Cells
@@ -110,18 +104,18 @@ namespace Sudoku.Helpers
             return matchedCell == null;
         }
 
-        /// <summary>
-        /// Initialize Filled Cells to preserve which will be used while backtracking.
-        /// </summary>
+
+        /// Инициализируйте заполненные ячейки, чтобы сохранить те, которые будут использоваться при обратном отслеживании
+
         private void IntializeFilledCells()
         {
             filledCells.Clear();
             filledCells.AddRange(grid.Cells.FindAll(cell => cell.Value != -1).Select(cell => cell.Index));
         }
 
-        /// <summary>
-        /// Initialize the blacklist.
-        /// </summary>
+
+        /// Инициализируйте черный список
+
         private void InitializeBlackList()
         {
             blackListCells = new List<List<int>>(grid.TotalCells);
@@ -129,80 +123,74 @@ namespace Sudoku.Helpers
                 blackListCells.Add(new List<int>());
         }
 
-        /// <summary>
-        /// Backtracking operation for the cell specified with index.
-        /// </summary>
-        /// <param name="index">The index.</param>
-        /// <returns>BackTrack To Index.</returns>
+
+        /// Операция обратного отслеживания для ячейки, указанной с помощью индекса
+
         private int BackTrackTo(int index)
         {
-            // Pass over the protected cells.
+            // Пройдите мимо защищенных ячеек
             while (filledCells.Contains(--index)) ;
 
-            // Get the back-tracked Cell.
+            // Найди отследенный номер сотового
             Cell backTrackedCell = grid.GetCell(index);
 
-            // Add the value to the black-list of the back-tracked cell.
+            // Добавьте значение в черный список ячейки, в которой был выполнен обратный поиск
             AddToBlacklist(backTrackedCell.Value, cellIndex: index);
 
-            // Reset the back-tracked cell value.
+            // Сбросьте значение ячейки, отслеживаемое в обратном порядке
             backTrackedCell.Value = -1;
 
-            // Reset the blacklist starting from the next one of the current tracking cell.
+            // Сбросьте черный список, начиная со следующей ячейки текущего отслеживания
             ClearBlackList(cleaningStartIndex: index + 1);
 
             return index;
         }
 
-        /// <summary>
-        /// Returns a valid number for the specified cell index.
-        /// </summary>
-        /// <param name="cellIndex">The cell index.</param>
-        /// <returns>Valid Number for the cell index.</returns>
+
+        /// Возвращает действительное число для указанного индекса ячейки
+
+
         private int GetValidNumberForTheCell(int cellIndex)
         {
             int foundNumber = 0;
             var possibleNumbers = Enumerable.Range(1, grid.GridSize).ToList();
 
-            // Find valid numbers for the cell.
+            // Найдите действительные номера для этой ячейки
             var validNumbers = possibleNumbers.Where(val => !blackListCells[cellIndex].Contains(val)).ToArray();
 
             if (validNumbers.Length > 0)
             {
-                // Return a (random) valid number from the valid numbers.
+                // Возвращает (случайное) действительное число из имеющихся действительных чисел
                 int choosenIndex = random.Next(validNumbers.Length);
                 foundNumber = validNumbers[choosenIndex];
             }
 
-            // Try to get valid (random) value for the current cell, if no any valid value break the loop.
+            // Попробуйте получить допустимое (случайное) значение для текущей ячейки, если ни одно допустимое значение не разорвет цикл
             do
             {
                 Cell currentCell = grid.GetCell(cellIndex);
 
-                // Check the found number if valid for the cell, if is not valid number for the cell then add the value to the blacklist of the cell.
+                // Проверьте найденный номер, действителен ли он для ячейки, если это неверный номер для ячейки, то добавьте это значение в черный список ячейки
                 if (foundNumber != 0 && !grid.Solver.IsValidValueForTheCell(foundNumber, currentCell))
                     AddToBlacklist(foundNumber, cellIndex);
                 else
                     break;
 
-                // Get a valid (random) value from valid numbers.
+                // Получите действительное (случайное) значение из действительных чисел
                 foundNumber = GetValidNumberForTheCell(cellIndex: cellIndex);
             } while (foundNumber != 0);
 
             return foundNumber;
         }
 
-        /// <summary>
-        /// Add value into the specified index of the blacklist. 
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="cellIndex">The cell index.</param>
+
+        /// Добавьте значение в указанный индекс черного списка
+
         private void AddToBlacklist(int value, int cellIndex) => blackListCells[cellIndex].Add(value);
 
-        /// <summary>
-        /// Clears the backlist after certian cell index.
-        /// </summary>
-        /// <param name="cleaningStartIndex">Clear the rest of the blacklist starting from the index.</param>
+
+        /// Очищает черный список после определенного индекса ячейки
+
         private void ClearBlackList(int cleaningStartIndex = 0)
         {
             for (int index = cleaningStartIndex; index < blackListCells.Count; index++)
