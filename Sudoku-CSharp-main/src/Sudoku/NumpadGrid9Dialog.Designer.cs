@@ -1,16 +1,16 @@
-﻿
+
 namespace Sudoku
 {
     partial class NumpadGrid9Dialog
     {
-        /// <summary>
+        
         /// Required designer variable.
-        /// </summary>
+        
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        
         /// Clean up any resources being used.
-        /// </summary>
+        
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
@@ -23,10 +23,10 @@ namespace Sudoku
 
         #region Windows Form Designer generated code
 
-        /// <summary>
+        
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
-        /// </summary>
+        
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NumpadGrid9Dialog));
@@ -185,11 +185,11 @@ namespace Sudoku
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.ForeColor = System.Drawing.Color.GhostWhite;
-            this.btnClear.Location = new System.Drawing.Point(87, 146);
+            this.btnClear.Location = new System.Drawing.Point(100, 146);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(69, 29);
+            this.btnClear.Size = new System.Drawing.Size(85, 29);
             this.btnClear.TabIndex = 9;
-            this.btnClear.Text = "Clear";
+            this.btnClear.Text = "Очистить";
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
@@ -202,9 +202,9 @@ namespace Sudoku
             this.btnCancel.ForeColor = System.Drawing.Color.GhostWhite;
             this.btnCancel.Location = new System.Drawing.Point(13, 146);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(69, 29);
+            this.btnCancel.Size = new System.Drawing.Size(85, 29);
             this.btnCancel.TabIndex = 10;
-            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Text = "Отменить";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
@@ -213,7 +213,7 @@ namespace Sudoku
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.ClientSize = new System.Drawing.Size(171, 197);
+            this.ClientSize = new System.Drawing.Size(190, 197);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnNumber9);
@@ -232,7 +232,7 @@ namespace Sudoku
             this.MinimizeBox = false;
             this.Name = "NumpadGrid9Dialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Select Number";
+            this.Text = "Выберите значение";
             this.ResumeLayout(false);
 
         }
